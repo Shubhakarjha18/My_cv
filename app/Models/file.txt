@@ -1,0 +1,84 @@
+<div class="section-testimonial" style=" visibility: visible; animation-name: slideInUp;">
+    <div class="clients-section pt-5 mb-0">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Clients</h2>
+            <div class="logos d-flex justify-content-center align-items-center gap-3">
+                @for ($i = 0; $i < 3; $i++)
+                    <img src="https://srv-np.techarttrekkies.com/placeholder/200/277dba/ffffff&text=Item+{{ $i }}" alt="Image {{ $i }}" class="img-fluid">
+                @endfor
+            </div>
+            <div class="logos d-flex justify-content-center align-items-center gap-3">
+                @for ($i = 0; $i < 2; $i++)
+                    <img src="https://srv-np.techarttrekkies.com/placeholder/200/277dba/ffffff&text=Item+{{ $i }}" alt="Image {{ $i }}" class="img-fluid">
+                @endfor
+            </div>
+        </div>
+    </div>
+    <style>
+        .logos img {
+            padding:10px;
+        }
+        .class {
+            
+        }
+        /* @media (max-width: 639px) {
+            .logos-small {
+                
+            }
+            .logos-large {
+                display: none;
+                visibility: hidden;
+            }
+        } */
+    </style>
+    @if ($testimonial != null)
+    <div class="container">
+        <h2 class="text-center mb-5 pt-5">{{$testimonial->title}}</h2>
+        <h5 class="news-section-title text-center mt-3  wow fadeIn" data-wow-delay="0.8s" id="news"
+            style="color: var(--title_red) !important; margin-bottom:60px;">{{ $testimonial->description }}
+        </h5>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="testimonial-slider" class="owl-carousel">
+                    @forelse ($testimonial->contents as $content)
+                    <div class="testimonial">
+                        <div class="pic">
+                            <img
+                                src="{{ $content->hasMedia('about-img') ? $content->getMedia('about-img')[0]->getFullUrl() : 'https://images.pexels.com/photos/704955/pexels-photo-704955.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' }}">
+                        </div>
+                        <p class="description">
+                            {{$content['description']}}
+
+                        </p>
+                        <h3 class="title">{{$content['title']}}</h3>
+                    </div>
+                    @empty
+
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
+    @endif
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js">
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#testimonial-slider").owlCarousel({
+            items: 2,
+            itemsDesktop: [1000, 2],
+            itemsDesktopSmall: [990, 2],
+            itemsTablet: [768, 1],
+            pagination: true,
+            navigation: false,
+            navigationText: ["", ""],
+            slideSpeed: 1000,
+            autoPlay: true
+        });
+    });
+</script>
